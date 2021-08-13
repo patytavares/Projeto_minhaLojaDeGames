@@ -4,34 +4,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
-@Table(name = "tb_categoria")
+@Table(name = "categoria")
 public class Categoria {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-
+	
 	@NotNull
 	@Size(min = 5, max = 100)
-	private String titulo;
-
+	private String titulo; 
+	
 	@NotNull
-	@Size(min = 5, max = 100)
-	private String nivel;
-
-	private int preco;
-
-	@ManyToOne
-	@JsonIgnoreProperties("categoria")
-	private Tema tema;
+	@Size (min = 5, max = 100)
+	private long nivel;
+	
+	@NotNull
+	@Size (min = 5, max = 100)
+	private float preco;
 
 	public long getId() {
 		return id;
@@ -49,28 +44,22 @@ public class Categoria {
 		this.titulo = titulo;
 	}
 
-	public String getNivel() {
+	public long getNivel() {
 		return nivel;
 	}
 
-	public void setNivel(String nivel) {
+	public void setNivel(long nivel) {
 		this.nivel = nivel;
 	}
 
-	public int getPreco() {
+	public float getPreco() {
 		return preco;
 	}
 
-	public void setPreco(int preco) {
+	public void setPreco(float preco) {
 		this.preco = preco;
 	}
 
-	public Tema getTema() {
-		return tema;
-	}
 
-	public void setTema(Tema tema) {
-		this.tema = tema;
-	}
 
 }
