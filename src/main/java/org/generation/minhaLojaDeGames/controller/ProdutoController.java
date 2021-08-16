@@ -2,8 +2,8 @@ package org.generation.minhaLojaDeGames.controller;
 
 import java.util.List;
 
-import org.generation.minhaLojaDeGames.model.Tema;
-import org.generation.minhaLojaDeGames.repository.TemaRepository;
+import org.generation.minhaLojaDeGames.model.Produto;
+import org.generation.minhaLojaDeGames.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,38 +19,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/tema")
-public class TemaController {
+@RequestMapping("/produto")
+public class ProdutoController {
 
 	@Autowired
-	private TemaRepository repository;
+	private ProdutoRepository repository;
 
 	@GetMapping
-	public ResponseEntity<List<Tema>> getAll() {
+	public ResponseEntity<List<Produto>> getAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Tema> getById(@PathVariable long id) {
-		return repository.findById(id).map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<Produto> getById(@PathVariable long id) {
+		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping("/nome/{nome}")
-	public ResponseEntity<List<Tema>> getByName(@PathVariable String nome) {
+	public ResponseEntity<List<Produto>> getByName(@PathVariable String nome) {
 		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(nome));
 
 	}
 
 	@PostMapping
-	public ResponseEntity<Tema> post(@RequestBody Tema tema) {
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(repository.save(tema));
+	public ResponseEntity<Produto> post(@RequestBody Produto produto) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(produto));
 	}
 
 	@PutMapping
-	public ResponseEntity<Tema> put(@RequestBody Tema tema) {
-		return ResponseEntity.ok(repository.save(tema));
+	public ResponseEntity<Produto> put(@RequestBody Produto produto) {
+		return ResponseEntity.ok(repository.save(produto));
 
 	}
 
@@ -60,4 +58,3 @@ public class TemaController {
 	}
 
 }
-
